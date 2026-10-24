@@ -78,6 +78,7 @@ export class Game {
 
   // ---------------- input ----------------
   bindInput() {
+    this.dragLook = false;
     addEventListener('keydown', e => {
       if (this.state === 'notebook' && (e.code === 'Tab' || e.code === 'Escape')) { e.preventDefault(); this.closeNotebook(); return; }
       if (this.state !== 'play') return;
@@ -94,9 +95,21 @@ export class Game {
       this.keys.delete(e.code);
       if (e.code === 'KeyE' && this.eDown >= 0) { if (!this.holdFired && this.state === 'play') this.interact('tap'); this.eDown = -1; this.endHold(); }
     });
-    addEventListener('mousemove', e => { if (this.state === 'play' && document.pointerLockElement) this.player.look(e.movementX, e.movementY); });
-    addEventListener('mousedown', () => { if (this.state === 'play' && !document.pointerLockElement) this.renderer.domElement.requestPointerLock(); });
+    addEventListener('mousemove', e => { if (this.state === 'play' && (document.pointerLockElement || this.dragLook)) this.player.look(e.movementX, e.movementY); });
+    addEventListener('mousedown', () => {
+      if (this.state !== 'play' || document.pointerLockElement) return;
+      this.dragLook = true;
+      this.requestPointerLock();
+    });
+    addEventListener('mouseup', () => { this.dragLook = false; });
     document.addEventListener('pointerlockchange', () => { if (!document.pointerLockElement && this.state === 'play') this.pause(); });
+  }
+
+  requestPointerLock() {
+    try {
+      const result = this.renderer.domElement.requestPointerLock?.();
+      result?.catch?.(() => { this.pointerLockUnavailable = true; });
+    } catch { this.pointerLockUnavailable = true; }
   }
 
   bindUI() {
@@ -118,7 +131,7 @@ export class Game {
       if ($('#mic').checked && this.audio.mic) { this.micOn = await this.audio.mic.enable(); }
       this.startLoops();
     } catch (err) { console.warn('[audio] unavailable', err); this.audio = stubAudio(); }
-    this.state = 'play'; this.renderer.domElement.requestPointerLock();
+    this.state = 'play'; this.requestPointerLock();
     this.message('Moreno 1418. Llueve desde la tarde.', 4);
   }
   scriptTapes() {
@@ -133,7 +146,7 @@ export class Game {
     ]);
   }
   pause() { this.state = 'pause'; $('#pause').hidden = false; this.audio.suspend?.(); }
-  resume() { $('#pause').hidden = true; this.state = 'play'; this.audio.resume?.(); this.renderer.domElement.requestPointerLock(); }
+  resume() { $('#pause').hidden = true; this.state = 'play'; this.audio.resume?.(); this.requestPointerLock(); }
 
   acoustics() {
     const B = this.building; const rooms = {};
@@ -550,7 +563,7 @@ export class Game {
     nb.querySelector('.inv').textContent = inv.join(' · ') || '—';
     nb.hidden = false;
   }
-  closeNotebook() { $('#notebook').hidden = true; this.state = 'play'; this.renderer.domElement.requestPointerLock(); }
+  closeNotebook() { $('#notebook').hidden = true; this.state = 'play'; this.requestPointerLock(); }
 
   // ---------------- QA ----------------
   qaShot({ x, y, z, yaw, pitch }) {
