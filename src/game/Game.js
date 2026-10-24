@@ -78,10 +78,10 @@ export class Game {
 
   // ---------------- input ----------------
   bindInput() {
-    this.dragLook = false;
     addEventListener('keydown', e => {
       if (this.state === 'notebook' && (e.code === 'Tab' || e.code === 'Escape')) { e.preventDefault(); this.closeNotebook(); return; }
       if (this.state !== 'play') return;
+      if (e.code === 'Escape') { e.preventDefault(); this.pause(); return; }
       if (e.code === 'Tab') { e.preventDefault(); this.openNotebook(); return; }
       if (e.repeat) return;
       this.keys.add(e.code);
@@ -95,21 +95,22 @@ export class Game {
       this.keys.delete(e.code);
       if (e.code === 'KeyE' && this.eDown >= 0) { if (!this.holdFired && this.state === 'play') this.interact('tap'); this.eDown = -1; this.endHold(); }
     });
-    addEventListener('mousemove', e => { if (this.state === 'play' && (document.pointerLockElement || this.dragLook)) this.player.look(e.movementX, e.movementY); });
-    addEventListener('mousedown', () => {
+    addEventListener('mousemove', e => { if (this.state === 'play' && document.pointerLockElement === this.renderer.domElement) this.player.look(e.movementX, e.movementY); });
+    this.renderer.domElement.addEventListener('click', () => {
       if (this.state !== 'play' || document.pointerLockElement) return;
-      this.dragLook = true;
       this.requestPointerLock();
     });
-    addEventListener('mouseup', () => { this.dragLook = false; });
-    document.addEventListener('pointerlockchange', () => { if (!document.pointerLockElement && this.state === 'play') this.pause(); });
+    document.addEventListener('pointerlockchange', () => { if (document.pointerLockElement !== this.renderer.domElement && this.state === 'play') this.pause(); });
   }
 
   requestPointerLock() {
+    this.pointerLockUnavailable = false;
+    const failed = () => { this.pointerLockUnavailable = true; if (this.state === 'play') this.pause(); };
     try {
-      const result = this.renderer.domElement.requestPointerLock?.();
-      result?.catch?.(() => { this.pointerLockUnavailable = true; });
-    } catch { this.pointerLockUnavailable = true; }
+      if (!this.renderer.domElement.requestPointerLock) { failed(); return; }
+      const result = this.renderer.domElement.requestPointerLock();
+      result?.catch?.(failed);
+    } catch { failed(); }
   }
 
   bindUI() {
@@ -122,6 +123,8 @@ export class Game {
   }
 
   async start() {
+    // Request capture inside the button gesture, before asynchronous audio setup.
+    this.requestPointerLock();
     $('#start-screen').hidden = true; $('#hud').hidden = false;
     try {
       const mod = await import('../audio/AudioEngine.js');
@@ -131,7 +134,8 @@ export class Game {
       if ($('#mic').checked && this.audio.mic) { this.micOn = await this.audio.mic.enable(); }
       this.startLoops();
     } catch (err) { console.warn('[audio] unavailable', err); this.audio = stubAudio(); }
-    this.state = 'play'; this.requestPointerLock();
+    this.state = 'play';
+    if (this.pointerLockUnavailable || document.pointerLockElement !== this.renderer.domElement) this.pause();
     this.message('Moreno 1418. Llueve desde la tarde.', 4);
   }
   scriptTapes() {
@@ -145,7 +149,11 @@ export class Game {
       { text: 'No le contesto.' }, { text: 'No le contesto.', repeatOf: 6 },
     ]);
   }
-  pause() { this.state = 'pause'; $('#pause').hidden = false; this.audio.suspend?.(); }
+  pause() {
+    this.state = 'pause'; this.keys.clear(); this.eDown = -1; this.endHold();
+    $('#pause').hidden = false; this.audio.suspend?.();
+    if (document.pointerLockElement === this.renderer.domElement) document.exitPointerLock();
+  }
   resume() { $('#pause').hidden = true; this.state = 'play'; this.audio.resume?.(); this.requestPointerLock(); }
 
   acoustics() {

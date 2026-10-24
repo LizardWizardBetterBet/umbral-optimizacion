@@ -47,7 +47,7 @@ Además recuerda qué hacés y se adapta: tus escondites, la linterna, las puert
 ## Rendimiento
 - La resolución interna del render se limita a 1× para reducir el costo de las pasadas de postproceso en pantallas de alta densidad.
 - La sombra dinámica de la linterna usa un mapa de 512×512 para aliviar la GPU.
-- Si Pointer Lock está bloqueado por el navegador, la cámara también responde al arrastre del mouse.
+- El mouse queda capturado durante la partida: mueve la cámara sin mantener clic y se libera al pausar con Escape. Si el navegador rechaza la captura, la partida queda en pausa.
 - Ver [docs/AUDITORIA_RENDIMIENTO.md](docs/AUDITORIA_RENDIMIENTO.md) para el relevamiento y las limitaciones de medición.
 
 ## Arquitectura
