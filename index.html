@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07090a" />
+    <title>UMBRAL</title>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="view" aria-label="UMBRAL, vista en primera persona"></canvas>
+
+      <main id="start-screen" class="overlay">
+        <div class="intro">
+          <div class="wordmark">UMBRAL</div>
+          <div id="brief" class="brief"></div>
+          <label class="mic"><input type="checkbox" id="mic" /> Usar micrófono. <span>Lo que digas se escucha en el edificio.</span></label>
+          <button id="start" class="primary">Entrar al edificio</button>
+          <p class="help">WASD caminar · Shift correr · C agacharse · Mouse mirar · E usar (mantener: despacio / forzar) · Q golpear · F linterna · R escuchar casete · Tab libreta<br/>Con auriculares.</p>
+        </div>
+      </main>
+
+      <div id="hud" class="hud" hidden>
+        <div id="crosshair" aria-hidden="true"></div>
+        <div id="interact" class="interact"></div>
+        <div id="message" class="message"></div>
+        <div id="sub" class="sub"></div>
+        <aside id="read" class="read" hidden><h3></h3><p></p></aside>
+      </div>
+
+      <section id="notebook" class="sheet" hidden>
+        <div class="paper">
+          <div class="eyebrow">Libreta · Caso 01 · Moreno 1418, 1°B</div>
+          <h2>Objetivos</h2><ul class="obj"></ul>
+          <h2>Hallazgos</h2><ul class="found"></ul>
+          <h2>Encima</h2><p class="inv"></p>
+          <button id="nb-close">Cerrar (Tab)</button>
+        </div>
+      </section>
+
+      <section id="pause" class="sheet" hidden>
+        <div class="paper small"><h2>En pausa</h2><p>El edificio sigue ahí.</p><button id="resume" class="primary">Volver</button></div>
+      </section>
+
+      <section id="exit" class="sheet" hidden>
+        <div class="paper">
+          <div class="eyebrow">Vereda · calle Moreno</div>
+          <h2>¿Qué le decimos a Marta?</h2>
+          <p id="exit-found" class="muted"></p>
+          <div id="exit-opts" class="opts"></div>
+          <button id="end-stay">Volver a entrar</button>
+        </div>
+      </section>
+
+      <section id="end" class="sheet" hidden>
+        <div class="paper">
+          <h2 id="end-title"></h2>
+          <p id="end-body" class="prewrap"></p>
+          <h3>Lo que aprendió de ustedes</h3>
+          <ul id="end-memory" class="memory"></ul>
+          <p id="end-variant" class="muted"></p>
+          <button id="restart" class="primary">Otra noche</button>
+        </div>
+      </section>
+      <div id="error" class="error" hidden></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
