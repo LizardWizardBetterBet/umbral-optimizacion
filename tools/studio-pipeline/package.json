@@ -1,0 +1,15 @@
+{
+  "name": "@ratlab/umbral-pipeline-consumer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Herramientas del estudio fijadas por SHA; fuera del bundle y del lockfile del juego.",
+  "dependencies": {
+    "@ratlab/studio-tools": "git+https://github.com/Ratwaredev/studio-tools.git#f4187952ea8f82faf5ce06b3e79887684ffd5262",
+    "playwright": "1.64.1",
+    "three": "0.186.1"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
