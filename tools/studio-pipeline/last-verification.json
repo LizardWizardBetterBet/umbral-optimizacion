@@ -1,0 +1,189 @@
+{
+  "kitVersion": "0.2.1",
+  "kitCommit": "0c146395985f6fc1f6cf7d836632795d678c55ef",
+  "kitMainMerge": "11da4fc36f24d60838f8cea9968325cc9daca410",
+  "game": "umbral",
+  "sourceCommitAtStart": "9ad50bc5c51979ec237272c77bbdb4d81f620854",
+  "pass": true,
+  "errors": [],
+  "warnings": [],
+  "backend": "Chromium headless completo, D3D11 solicitado; verificar GPU real en native.gpu",
+  "gpu": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001638) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "renderer": {
+    "geometries": 516,
+    "textures": 60,
+    "programs": 27,
+    "calls": 1,
+    "triangles": 1,
+    "points": 0,
+    "lines": 0,
+    "gpuBytes": null
+  },
+  "physics": {
+    "enabled": false,
+    "reason": "Este SHA de UMBRAL no instancia Rapier"
+  },
+  "gpuSamples": [
+    {
+      "available": true,
+      "milliseconds": 5.23117
+    },
+    {
+      "available": true,
+      "milliseconds": 3.07528
+    },
+    {
+      "available": true,
+      "milliseconds": 3.03925
+    },
+    {
+      "available": true,
+      "milliseconds": 3.48942
+    },
+    {
+      "available": true,
+      "milliseconds": 3.91855
+    }
+  ],
+  "osMemoryBaseline": {
+    "instances": 5,
+    "processId": 30908,
+    "available": true,
+    "sharedBytes": 9154560,
+    "source": "Windows WDDM GPU Process Memory",
+    "scope": "Chromium GPU process allocations, including compositor; not exclusively game textures",
+    "dedicatedBytes": 3186688,
+    "committedBytes": 12361728
+  },
+  "osMemoryLoaded": {
+    "sharedBytes": 129093632,
+    "processId": 30908,
+    "committedBytes": 532516864,
+    "source": "Windows WDDM GPU Process Memory",
+    "available": true,
+    "scope": "Chromium GPU process allocations, including compositor; not exclusively game textures",
+    "instances": 5,
+    "dedicatedBytes": 403402752
+  },
+  "osMemoryDelta": {
+    "dedicatedBytes": 400216064,
+    "sharedBytes": 119939072,
+    "committedBytes": 520155136
+  },
+  "preparedAssets": [],
+  "assetManifest": {
+    "v": 1,
+    "game": "umbral",
+    "assets": [],
+    "pass": true
+  },
+  "visual": {
+    "frames": 20,
+    "failed": 0,
+    "injectedRegressionDetected": true
+  },
+  "resources": {
+    "baseline": {
+      "geometries": 516,
+      "textures": 60,
+      "programs": 27,
+      "calls": 0,
+      "triangles": 0,
+      "points": 0,
+      "lines": 0,
+      "gpuBytes": null
+    },
+    "cycles": [
+      {
+        "geometries": 516,
+        "textures": 60,
+        "programs": 27,
+        "calls": 0,
+        "triangles": 0,
+        "points": 0,
+        "lines": 0,
+        "gpuBytes": null
+      },
+      {
+        "geometries": 516,
+        "textures": 60,
+        "programs": 27,
+        "calls": 0,
+        "triangles": 0,
+        "points": 0,
+        "lines": 0,
+        "gpuBytes": null
+      },
+      {
+        "geometries": 516,
+        "textures": 60,
+        "programs": 27,
+        "calls": 0,
+        "triangles": 0,
+        "points": 0,
+        "lines": 0,
+        "gpuBytes": null
+      }
+    ],
+    "growth": [
+      {
+        "growth": {
+          "geometries": 0,
+          "textures": 0,
+          "programs": 0
+        },
+        "pass": true
+      },
+      {
+        "growth": {
+          "geometries": 0,
+          "textures": 0,
+          "programs": 0
+        },
+        "pass": true
+      },
+      {
+        "growth": {
+          "geometries": 0,
+          "textures": 0,
+          "programs": 0
+        },
+        "pass": true
+      }
+    ],
+    "injectedLeak": {
+      "growth": {
+        "geometries": 1,
+        "textures": 2,
+        "programs": 2
+      },
+      "pass": false
+    },
+    "recovered": {
+      "growth": {
+        "geometries": 0,
+        "textures": 0,
+        "programs": 0
+      },
+      "pass": true
+    }
+  },
+  "nativeScenario": null,
+  "experiment": null,
+  "functional": {
+    "pass": true,
+    "stateAfterStart": "play",
+    "pointerLock": true,
+    "movementMeters": 0.8393883303735359,
+    "torch": true,
+    "opened": true,
+    "closed": true,
+    "audio": {
+      "started": true,
+      "context": "running",
+      "loops": 4
+    },
+    "scope": "Botón de inicio real; movimiento/puerta por simulación y gramática nativas. No certifica captura de ratón."
+  },
+  "command": "node tools/studio-pipeline.mjs pipeline --out <nueva> --browsers <Playwright> --hardware --functional"
+}

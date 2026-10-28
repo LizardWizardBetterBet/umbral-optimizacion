@@ -1,0 +1,28 @@
+[
+  {
+    "file": "umbral_casa_rural.png",
+    "baselineCommit": "6e4f004d05560f8548243a73b87a304e67c914e7",
+    "unchangedSinceBaseline": true,
+    "previousManifest": {
+      "archivo": "umbral_casa_rural.png",
+      "bytes": 2193340,
+      "sha256": "2b9f699b09fe4c562d0b4423049cf1a389caaf3b1435b217031347004661a50b"
+    },
+    "verifiedBytes": 2199110,
+    "verifiedSha256": "40ba8ca13edecd71e53abacb8c637697d12af31db225f56ea0475bbe2f2da13e",
+    "pngCRC": "all chunks passed pngjs checkCRC"
+  },
+  {
+    "file": "umbral_instalacion_subterranea.png",
+    "baselineCommit": "6e4f004d05560f8548243a73b87a304e67c914e7",
+    "unchangedSinceBaseline": true,
+    "previousManifest": {
+      "archivo": "umbral_instalacion_subterranea.png",
+      "bytes": 2183156,
+      "sha256": "53224f188d682815e338c420ad4468a7a58bba0c983699c88fba87b92cb73ab7"
+    },
+    "verifiedBytes": 2188926,
+    "verifiedSha256": "48f560204f15af976d634f5a0092274a82e18e3bc18fe9eeea249ca516b0a835",
+    "pngCRC": "all chunks passed pngjs checkCRC"
+  }
+]
