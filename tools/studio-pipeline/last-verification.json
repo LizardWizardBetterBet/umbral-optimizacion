@@ -1,12 +1,14 @@
 {
-  "kitCommit": "f4187952ea8f82faf5ce06b3e79887684ffd5262",
+  "kitVersion": "0.2.1",
+  "kitCommit": "0c146395985f6fc1f6cf7d836632795d678c55ef",
+  "kitMainMerge": "11da4fc36f24d60838f8cea9968325cc9daca410",
   "game": "umbral",
-  "sourceCommitAtStart": "2e4bfce9c9f766a89b7853559cbe85d02cb28129",
+  "sourceCommitAtStart": "9ad50bc5c51979ec237272c77bbdb4d81f620854",
   "pass": true,
   "errors": [],
   "warnings": [],
-  "backend": "Chromium headless ANGLE/SwiftShader; no benchmark Vega",
-  "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "backend": "Chromium headless completo, D3D11 solicitado; verificar GPU real en native.gpu",
+  "gpu": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001638) Direct3D11 vs_5_0 ps_5_0, D3D11)",
   "renderer": {
     "geometries": 516,
     "textures": 60,
@@ -21,12 +23,66 @@
     "enabled": false,
     "reason": "Este SHA de UMBRAL no instancia Rapier"
   },
+  "gpuSamples": [
+    {
+      "available": true,
+      "milliseconds": 5.23117
+    },
+    {
+      "available": true,
+      "milliseconds": 3.07528
+    },
+    {
+      "available": true,
+      "milliseconds": 3.03925
+    },
+    {
+      "available": true,
+      "milliseconds": 3.48942
+    },
+    {
+      "available": true,
+      "milliseconds": 3.91855
+    }
+  ],
+  "osMemoryBaseline": {
+    "instances": 5,
+    "processId": 30908,
+    "available": true,
+    "sharedBytes": 9154560,
+    "source": "Windows WDDM GPU Process Memory",
+    "scope": "Chromium GPU process allocations, including compositor; not exclusively game textures",
+    "dedicatedBytes": 3186688,
+    "committedBytes": 12361728
+  },
+  "osMemoryLoaded": {
+    "sharedBytes": 129093632,
+    "processId": 30908,
+    "committedBytes": 532516864,
+    "source": "Windows WDDM GPU Process Memory",
+    "available": true,
+    "scope": "Chromium GPU process allocations, including compositor; not exclusively game textures",
+    "instances": 5,
+    "dedicatedBytes": 403402752
+  },
+  "osMemoryDelta": {
+    "dedicatedBytes": 400216064,
+    "sharedBytes": 119939072,
+    "committedBytes": 520155136
+  },
+  "preparedAssets": [],
+  "assetManifest": {
+    "v": 1,
+    "game": "umbral",
+    "assets": [],
+    "pass": true
+  },
   "visual": {
     "frames": 20,
     "failed": 0,
     "injectedRegressionDetected": true
   },
-  "resourceGate": {
+  "resources": {
     "baseline": {
       "geometries": 516,
       "textures": 60,
@@ -112,6 +168,7 @@
       "pass": true
     }
   },
+  "nativeScenario": null,
   "experiment": null,
   "functional": {
     "pass": true,
@@ -126,11 +183,7 @@
       "context": "running",
       "loops": 4
     },
-    "scope": "Botï¿½n de inicio real; movimiento/puerta por simulaciï¿½n y gramï¿½tica nativas. No certifica captura de ratï¿½n."
+    "scope": "Botón de inicio real; movimiento/puerta por simulación y gramática nativas. No certifica captura de ratón."
   },
-  "spector": {
-    "commands": 9512,
-    "file": "spector.json"
-  },
-  "command": "node tools/studio-pipeline.mjs probe --out <nueva> --browsers <Playwright> --functional --spector"
+  "command": "node tools/studio-pipeline.mjs pipeline --out <nueva> --browsers <Playwright> --hardware --functional"
 }

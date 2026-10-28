@@ -1,17 +1,19 @@
-# Pipeline compartido
+# Pipeline compartido 0.2.1
 
-Instalar una vez: `npm ci --prefix tools/studio-pipeline --ignore-scripts`.
+El kit esta integrado en main de Ratwaredev/studio-tools y fijado por commit en package-lock.json. Requiere Node >=24 y acceso Git HTTPS al repositorio privado. No requiere rutas personales ni claves SSH.
 
-`node tools/studio-pipeline.mjs doctor` verifica la instalaci贸n fijada por commit.
-`node tools/studio-pipeline.mjs probe --out artifacts/studio-<nombre-nuevo> --browsers <carpeta-Playwright>` corre el diagn贸stico en este juego. Usar un checkout aislado mientras haya otro agente editando.
-`node tools/studio-pipeline.mjs assets --out artifacts/assets-<nombre-nuevo>` valida los assets reales.
-`node tools/studio-pipeline.mjs atlas <ruta.glb>` detecta UV inv谩lidas/overlap; no reescribe el atlas.
-`node tools/studio-pipeline.mjs ktx <entrada.png> <candidato.ktx2> --encoder <toktx.exe> --mode uastc` genera una copia offline.
+```sh
+npm ci --prefix tools/studio-pipeline --ignore-scripts
+node tools/studio-pipeline.mjs doctor
+node tools/studio-pipeline.mjs pipeline --out <carpeta-nueva> --browsers <Playwright> --hardware
+```
 
-El kit vive en este subproyecto de herramientas: no cambia dependencias, configuraci贸n, fuentes ni guardados del juego. No usa GitHub Actions ni accede a red al ejecutar el juego. No aprobar golden ni sustituir assets sin pasar sus gates. El mismo comando sirve a los otros dos juegos; la implementaci贸n pertenece a studio-tools.
+pipeline prepara los modelos reales, valida semantica/rig/atlas/hashes y carga esas salidas por manifiesto en el juego real. Rechaza sobrescrituras y assets cambiados tras validar. No sustituye originales ni agrega dependencias al bundle del juego. Windows mide memoria dedicada/compartida/committed del proceso GPU Chromium; incluye compositor.
 
+Opciones: --spector captura WebGL; --bvh compara raycasts estaticos sin modificar fuentes; --hardware usa Chromium completo/D3D11. Datos y resultados: EVIDENCE.md y last-verification.json.
 
-Opciones del probe: `--hardware` mide GPU real si Chromium/D3D11 la expone; `--bvh` compara raycasts est醫icos sin cambiar fuentes; `--spector` captura WebGL. `compress-glb <original.glb> <nuevo.glb> --encoder <toktx.exe>` genera candidato KTX2; no sustituye assets. Las trazas se abren en Perfetto externo.
-`probe --out <nueva> --functional --hardware` prueba inicio, movimiento, linterna, puerta y audio reales.
+Otros comandos: assets, prepare-assets, optimize, atlas, ktx, compress-glb, rig y retarget. Los comandos ktx/compress-glb usan --encoder <toktx.exe> externo. rig <modelo.glb> inspecciona capacidades. retarget <source.glb> <target.glb> <clip.json> <nuevo.clip.json> usa SkeletonUtils y valida conservacion del rig, sin sobrescribir archivos. El kit incluye fixtures/animation/rpg-native-walk.clip.json capturado del Animator real.
 
-El repositorio del kit es privado: Git debe tener acceso HTTPS a Ratwaredev/studio-tools (por ejemplo mediante la autenticaci髇 GitHub habitual del equipo). El lock fija HTTPS y SHA; no requiere claves SSH ni rutas C:/RatLabStudio.
+Decisiones, versiones, licencias y ensayos cerrados: docs/CONSUMABLE-20261028.md del kit. Sin GitHub Actions, servicios de red runtime ni produccion. Los golden requieren juicio humano.
+
+Agregar --functional al pipeline para inicio, movimiento, linterna, apertura/cierre de puerta y audio real. UMBRAL es procedural: no se inventan GLB. Las dos correcciones de manifiesto preservan las imagenes originales; procedencia en reference-provenance.json.
