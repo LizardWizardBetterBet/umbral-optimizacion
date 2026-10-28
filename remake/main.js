@@ -185,7 +185,7 @@ for(const room of plan.rooms) {
     const result=dispatch({kind:'door',target:room.id});
     if(result.ok){
       door.open=state.doors[room.id];
-      door.target=door.open?-room.side*1.46:0;
+      door.target=door.open?room.side*1.46:0;
       if(door.open&&door.collider){world.removeCollider(door.collider,true);door.collider=null;}
       if(!door.open)door.collider=collider(room.side*1.6,1.2,room.z,.19,2.4,1.14);
     }
