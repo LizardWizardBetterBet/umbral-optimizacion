@@ -1,0 +1,136 @@
+{
+  "kitCommit": "f4187952ea8f82faf5ce06b3e79887684ffd5262",
+  "game": "umbral",
+  "sourceCommitAtStart": "2e4bfce9c9f766a89b7853559cbe85d02cb28129",
+  "pass": true,
+  "errors": [],
+  "warnings": [],
+  "backend": "Chromium headless ANGLE/SwiftShader; no benchmark Vega",
+  "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "renderer": {
+    "geometries": 516,
+    "textures": 60,
+    "programs": 27,
+    "calls": 1,
+    "triangles": 1,
+    "points": 0,
+    "lines": 0,
+    "gpuBytes": null
+  },
+  "physics": {
+    "enabled": false,
+    "reason": "Este SHA de UMBRAL no instancia Rapier"
+  },
+  "visual": {
+    "frames": 20,
+    "failed": 0,
+    "injectedRegressionDetected": true
+  },
+  "resourceGate": {
+    "baseline": {
+      "geometries": 516,
+      "textures": 60,
+      "programs": 27,
+      "calls": 0,
+      "triangles": 0,
+      "points": 0,
+      "lines": 0,
+      "gpuBytes": null
+    },
+    "cycles": [
+      {
+        "geometries": 516,
+        "textures": 60,
+        "programs": 27,
+        "calls": 0,
+        "triangles": 0,
+        "points": 0,
+        "lines": 0,
+        "gpuBytes": null
+      },
+      {
+        "geometries": 516,
+        "textures": 60,
+        "programs": 27,
+        "calls": 0,
+        "triangles": 0,
+        "points": 0,
+        "lines": 0,
+        "gpuBytes": null
+      },
+      {
+        "geometries": 516,
+        "textures": 60,
+        "programs": 27,
+        "calls": 0,
+        "triangles": 0,
+        "points": 0,
+        "lines": 0,
+        "gpuBytes": null
+      }
+    ],
+    "growth": [
+      {
+        "growth": {
+          "geometries": 0,
+          "textures": 0,
+          "programs": 0
+        },
+        "pass": true
+      },
+      {
+        "growth": {
+          "geometries": 0,
+          "textures": 0,
+          "programs": 0
+        },
+        "pass": true
+      },
+      {
+        "growth": {
+          "geometries": 0,
+          "textures": 0,
+          "programs": 0
+        },
+        "pass": true
+      }
+    ],
+    "injectedLeak": {
+      "growth": {
+        "geometries": 1,
+        "textures": 2,
+        "programs": 2
+      },
+      "pass": false
+    },
+    "recovered": {
+      "growth": {
+        "geometries": 0,
+        "textures": 0,
+        "programs": 0
+      },
+      "pass": true
+    }
+  },
+  "experiment": null,
+  "functional": {
+    "pass": true,
+    "stateAfterStart": "play",
+    "pointerLock": true,
+    "movementMeters": 0.8393883303735359,
+    "torch": true,
+    "opened": true,
+    "closed": true,
+    "audio": {
+      "started": true,
+      "context": "running",
+      "loops": 4
+    },
+    "scope": "Botï¿½n de inicio real; movimiento/puerta por simulaciï¿½n y gramï¿½tica nativas. No certifica captura de ratï¿½n."
+  },
+  "spector": {
+    "commands": 9512,
+    "file": "spector.json"
+  },
+  "command": "node tools/studio-pipeline.mjs probe --out <nueva> --browsers <Playwright> --functional --spector"
+}
